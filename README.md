@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/images/logo.png" />
+  <img src="static/logo.png" />
 </p>
 <P align="center">
   <img src="https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white" alt="TypeScript Language, NestJS Framework" />
