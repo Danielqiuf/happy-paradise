@@ -10,5 +10,5 @@ declare interface BaseComponentHooks {
 }
 
 declare interface BaseComponentConfiguration {
-  navbar?: ComponentNavBar.NavBarConfiguration
+  navbar?: ComponentNavBar.NavBarProps
 }

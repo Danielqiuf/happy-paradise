@@ -31,9 +31,11 @@ export default class NavBar extends React.Component<ComponentNavBar.NavBarProps,
     }}
     >
       <View className='navbar-content'>
-        <Text>首页</Text>
+        <View className={'navbar-left'}>
+          {this.props.renderLeft?.()}
+        </View>
+        {this.props.title ? (<Text className={'navbar-title'}>{this.props.title}</Text>) : null}
       </View>
-      {this.props.children}
     </View>
   }
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import NavBar from "@/components/NavBar/NavBar";
 import * as Is from "@/utils/is";
+import BaseMain from "@/layout/baseMain/baseMain";
+import BaseContent from "@/layout/baseContent/baseContent";
 
 export default class BaseComponent<
     Props extends AMap = AMap,
@@ -20,7 +22,7 @@ export default class BaseComponent<
     }
   }
 
-  navbar?: ComponentNavBar.NavBarConfiguration
+  navbar?: ComponentNavBar.NavBarProps
 
   is?: typeof Is
 
@@ -53,15 +55,18 @@ export default class BaseComponent<
   renderBaseUi() {
     if (this.navbar) {
       return (
-        <NavBar>
-          {this.ui!() as React.ReactNode}
-        </NavBar>
+        <BaseMain>
+          <NavBar {...this.navbar} />
+          <BaseContent>
+            {this.ui!() as React.ReactNode}
+          </BaseContent>
+        </BaseMain>
       )
     }
   }
 
   render() {
-    console.error('navbar', this.navbar)
+
     if (this.ui) {
       return this.renderBaseUi()
     }
