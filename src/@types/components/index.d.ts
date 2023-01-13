@@ -1,14 +1,25 @@
 declare namespace ComponentNavBar {
-  export interface NavBarProps {
-    transparent?: boolean
-    title?: string
-    renderLeft?: Fn<any, React.ReactNode>
-  }
 
   export interface NavBarState {
     navbarHeight: number
     statusBarHeight: number
+    navbarFullHeight: number
+    visible: boolean
+    title: string
+    transparent: boolean
+    renderLeft: Fn<any, React.ReactNode> | null
   }
+
+
+  export interface ContextType extends NavBarState, ContextTypeAction {
+
+  }
+
+  export interface ContextTypeAction {
+    show(fields?: Partial<NavBarState>): void
+    setFields(fields?: Partial<NavBarState>): void
+  }
+
 }
 
 declare namespace ComponentLogo {

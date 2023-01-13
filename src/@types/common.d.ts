@@ -27,9 +27,6 @@ declare type IReactComponent<P = any> =
   | React.FunctionComponent<P>
   | React.ForwardRefExoticComponent<P>
 
-declare interface ComponentMerge<P = {}, S = {}, PP = any> extends React.Component<P, S, PP>, BaseComponentHooks {
-
-}
 
 declare type TreeNode<Item extends keyof any> = List<Tree<Item> & {
   children?: Tree<Item> | List<Tree<Item>> | Null;
@@ -42,4 +39,3 @@ declare type HooksWillUpdate<Props, State> = [
   Readonly<State>,
   any
 ]
-

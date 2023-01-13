@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import {CSSProperties} from "react";
 
 export async function getStatusBarHeight() {
   let height = 0
@@ -34,8 +35,18 @@ export async function getMenuWholeInfo() {
   const menu = Taro.getMenuButtonBoundingClientRect()
   // console.error('statr', statusBarHeight, menu.height)
   return {
-    fullHeight: (menu.top - statusBarHeight) * 2 + menu.height,
+    menuHeight: (menu.top - statusBarHeight) * 2 + menu.height,
     statusBarHeight,
     ...menu
+  }
+}
+
+export function mergeStyle(...args: CSSProperties[]): CSSProperties | undefined {
+  if (args && args.length) {
+    const style = Object.create(null)
+    args.forEach((sty) => {
+      Object.assign(style, sty)
+    })
+    return Object.freeze(style)
   }
 }

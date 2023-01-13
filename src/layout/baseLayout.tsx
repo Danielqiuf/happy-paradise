@@ -1,24 +1,28 @@
 import React from "react";
+import { createNavBar, NavBarContext } from "@/components/NavBar/NavBarContext";
 import BoundaryCatch from '../HOC/error-boundary'
+import BaseMain from "@/layout/baseMain/baseMain";
+import BaseContent from "@/layout/baseContent/baseContent";
+import NavBar from "@/components/NavBar/NavBar";
 
-
-@BoundaryCatch
-class BaseLayout extends React.Component {
-
-  render() {
-    return this.props.children
-  }
-}
 
 export function $baseLayoutPageBuilder(Page: React.JSXElementConstructor<any>) {
-  return class extends React.Component<any, any> {
-    componentDidMount() {
-    }
+
+  @BoundaryCatch
+  class BaseLayout extends React.Component<any, any> {
+    static contextType = NavBarContext
+
+    context: ComponentNavBar.ContextType
 
     render() {
-      return <BaseLayout>
-        <Page />
-      </BaseLayout>
+      return (<BaseMain>
+        <NavBar />
+        <BaseContent>
+          <Page {...this.props} navbar={this.context} />
+        </BaseContent>
+      </BaseMain>)
     }
   }
+
+  return createNavBar(BaseLayout)
 }

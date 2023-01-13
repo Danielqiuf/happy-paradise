@@ -2,26 +2,26 @@ import React from "react";
 import autobind from "@/HOC/autobind";
 import { View, Text } from "@tarojs/components";
 import {AppStore} from '@/store/modules/app'
-import BaseComponent from "@/base/BaseComponent";
 import "./index.less";
 import Logo from "@/components/Logo/Logo";
 
 
 @autobind('AppStore')
-export default class Index extends BaseComponent<{}, PageIndexState, BaseAppStoreProp<AppStore>> {
+export default class Index extends React.Component<BaseProps<{}>, PageIndexState, BaseAppStoreProp<AppStore>> {
   constructor(props) {
-    super(props, {
-      navbar: {
-        transparent: true,
-        renderLeft: () => (
-          <View className={'left-wrapper'}>
-            <Logo width={40} height={40} />
-            <Text className={'left-wrapper-title'}>创意人生栈</Text>
-          </View>
-        )
-      },
-    });
-    this.mountStore()
+    super(props);
+  }
+
+  UNSAFE_componentWillMount() {
+    this.props.navbar?.show({
+      transparent: true,
+      renderLeft: () => (
+        <View className={'left-wrapper'}>
+          <Logo width={40} height={40} />
+          <Text className={'left-wrapper-title'}>创意人生栈</Text>
+        </View>
+      )
+    })
   }
 
   store: AppStore;
@@ -30,22 +30,8 @@ export default class Index extends BaseComponent<{}, PageIndexState, BaseAppStor
     counter: 0,
   };
 
-  mountStore() {
-    this.store = this.props.AppStore
-  }
 
-  mounted() {
-
-  }
-
-  handleClick = () => {
-    this.setState(({ counter }) => ({
-      counter: counter + 1,
-    }));
-    this.store.appLogin(3)
-  };
-
-  ui()  {
+  render()  {
     // if (this.state.counter === 2) {
     //   // 模拟 JS 报错
     //   throw new Error("I crashed!");

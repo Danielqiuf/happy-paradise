@@ -1,41 +1,69 @@
 import React from "react";
 import {View,Text} from "@tarojs/components";
-import {getMenuWholeInfo} from "@/utils/tool";
+import {getMenuWholeInfo, mergeStyle} from "@/utils/tool";
 import './NavBar.less'
+import {absoluteTopLeft} from "@/constants/style";
+import { NavBarContext } from "@/components/NavBar/NavBarContext";
 
-export default class NavBar extends React.Component<ComponentNavBar.NavBarProps, ComponentNavBar.NavBarState> {
+
+export default class NavBar extends React.Component {
+  static contextType = NavBarContext;
+
+  context: ComponentNavBar.ContextType
+
   constructor(props) {
     super(props);
-    this.calcMenuSize()
   }
 
-  state = {
-    navbarHeight: 0,
-    statusBarHeight: 0
+
+  async componentDidMount() {
+    try {
+      await this.getMenuSize()
+    } catch(e) {
+      //
+    }
   }
 
-  async calcMenuSize() {
+  async getMenuSize() {
     const menuSizeInfo = await getMenuWholeInfo()
-    this.setState({
-      navbarHeight: menuSizeInfo.fullHeight,
-      statusBarHeight: menuSizeInfo.statusBarHeight
+    this.context.setFields({
+      navbarHeight: menuSizeInfo.menuHeight,
+      statusBarHeight: menuSizeInfo.statusBarHeight,
+      navbarFullHeight: menuSizeInfo.menuHeight + menuSizeInfo.statusBarHeight
     })
   }
 
-  render() {
-    const { navbarHeight, statusBarHeight } = this.state
+  get navBarContentStyle() {
+    if (this.context.transparent) {
+      return {
+        ...absoluteTopLeft
+      }
+    }
+    return {}
+  }
 
-    return <View className='navbar-wrapper' style={{
-      height: navbarHeight + 'px',
-      paddingTop: statusBarHeight + 'px'
-    }}
+  get navBarRect() {
+    return {
+      height: `${this.context.navbarHeight}px`,
+      paddingTop: `${this.context.statusBarHeight}px`
+    }
+  }
+
+  render() {
+    const { renderLeft, title } = this.context
+    return <View className='navbar-wrapper' style={mergeStyle(
+      this.navBarRect,
+      this.navBarContentStyle
+    )}
     >
       <View className='navbar-content'>
         <View className={'navbar-left'}>
-          {this.props.renderLeft?.()}
+          {renderLeft?.()}
         </View>
-        {this.props.title ? (<Text className={'navbar-title'}>{this.props.title}</Text>) : null}
+        {title ? (<Text className={'navbar-title'}>{title}</Text>) : null}
       </View>
     </View>
   }
 }
+
+
