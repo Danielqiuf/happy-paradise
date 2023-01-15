@@ -5,10 +5,10 @@ import {AppStore} from '@/store/modules/app'
 import "./index.less";
 import TopBackground from '@/assets/images/index_top-bg.png'
 import BaseComponent from "@/base/BaseComponent";
-import IndexStatusBar from "../components/IndexStatusBar/IndexStatusBar";
+import IndexStatusBar from "../components/IndexStatusBar";
 
 
-@autobind('AppStore')
+ @autobind('AppStore')
 export default class Index extends BaseComponent<{}, PageIndexState, AppStore> {
   constructor(props) {
     super(props);
