@@ -16,9 +16,26 @@ export default class Logo extends React.Component<ComponentLogo.LogoProps> {
     return {}
   }
 
+  get wrapperBorderStyle() {
+    if (this.props.border) {
+      return {
+        borderWidth: this.props.borderWidth || 1,
+        borderColor: this.props.borderColor || '#fff',
+        borderStyle: 'solid'
+      }
+    }
+    return {}
+  }
+
   render() {
     return (
-      <View className={'logo-wrapper'} style={this.wrapperStyle}>
+      <View className={'logo-wrapper'} style={{
+        ...this.wrapperStyle,
+        ...this.wrapperBorderStyle,
+        ...{
+          borderRadius: this.props.round ? '50%' : '0',
+        },
+      }}>
         <Image src={img} mode={'aspectFit'} className={'logo-image'} />
       </View>
     );

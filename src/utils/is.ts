@@ -10,6 +10,9 @@ export function object(target: Unknow): target is AMap {
 export function promise<T = any>(target: unknown): target is Promise<T> {
   return object(target) && func(target.then) && func(target.catch)
 }
+export function str(target: unknown): target is string {
+  return typeof target === 'string'
+}
 export function date(target: Unknow): target is Date {
   return Object.prototype.toString.call(target) === '[object Date]' &&
   !Number.isNaN((target as Date).getTime());

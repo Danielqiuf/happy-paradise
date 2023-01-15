@@ -17,7 +17,7 @@ export default $baseLayoutPageBuilder(class Person extends React.Component<{}, P
   }
 
 
-  ui()  {
+  render()  {
     // if (this.state.counter === 2) {
     //   // 模拟 JS 报错
     //   throw new Error("I crashed!");

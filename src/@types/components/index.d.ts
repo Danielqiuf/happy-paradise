@@ -26,5 +26,9 @@ declare namespace ComponentLogo {
   export interface LogoProps {
     width?: number
     height?: number
+    round?: boolean
+    border?: boolean
+    borderWidth?: number
+    borderColor?: string
   }
 }

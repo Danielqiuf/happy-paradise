@@ -9,5 +9,5 @@ declare type StorePropsBase<StoreProp = {}> = {
 }
 
 declare type BaseAppStoreProp<StoreProp = {}> = {
-  [key in StoreKeys]: StoreProp
+  [key in StoreKeys]?: StoreProp
 }
