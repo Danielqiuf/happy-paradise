@@ -16,6 +16,10 @@
 1. 集成了各种线上线下休闲游戏玩法
 2. 纯React框架打造的小程序，快速简单
 
+## 作者信息
+- author: Danielqiu
+- email: azunya693286464@gmail.com
+
 ### 技术生态圈
 - 基于Taro+Typescript+Mobx+LeanCloud生态圈打造技术架构，具有多端小程序部署的能力
 - 具有成熟的多平台兼容处理规范与代码编写规范
